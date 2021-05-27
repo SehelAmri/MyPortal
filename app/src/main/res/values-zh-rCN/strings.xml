@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">我的门户</string>
+    <string name="lg_langDropdown_txt_en">英语</string>
+    <string name="lg_langDropdown_txt_es">西班牙语</string>
+    <string name="lg_langDropdown_txt_zh_rCN">中文 （简体）</string>
+    <string name="lg_adb_set_lang_title">选择你的语言</string>
+    <string name="lg_username">用户名</string>
+    <string name="lg_password">密码</string>
+    <string name="lg_log_in">登录</string>
+    <string name="lg_forgot_your_password">忘记密码了吗？</string>
+    <string name="lg_don_t_have_an_account">还没有帐号？</string>
+    <string name="log_sign_up">" 注册。"</string>
+    <string name="create_account">Create your account</string>
+    <string name="suEmail">Email</string>
+    <string name="suName">Username</string>
+    <string name="suPassword">Password</string>
+    <string name="suNumber">Phone Number</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="lg_or">OR</string>
+    <string name="transfer_data_with_ease_through_out_all_devices">Transfer data with ease through out all devices</string>
+    <string name="continue_without_signing_up">Continue without signing up</string>
+    <string-array name="languages">
+        <item>@string/lg_langDropdown_txt_en</item>
+        <item>@string/lg_langDropdown_txt_es</item>
+        <item>@string/lg_langDropdown_txt_zh_rCN</item>
+    </string-array>
+    <string-array name="languages_initials">
+        <item>en</item>
+        <item>es</item>
+        <item>zh</item>
+    </string-array>
+</resources>
