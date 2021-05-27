@@ -9,62 +9,86 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:orientation="vertical"
-        android:layout_centerInParent="true"
-        android:paddingBottom="@dimen/padding_x"
-        android:paddingTop="@dimen/padding_2x"
-
-        >
+        android:paddingHorizontal="@dimen/margin_20"
+        android:gravity="center">
         <TextView
             android:id="@+id/tv_welcome_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginVertical="@dimen/margin_20"
             android:visibility="visible"
             android:text="@string/create_account"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_24"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_14"
+            android:paddingLeft="5dp"
+            android:text="@string/lg_username"/>
         <EditText
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_3x"
-            android:inputType="textPersonName"
-            android:hint="@string/suName" />
+            android:layout_marginVertical="@dimen/margin_10"
+            android:maxLines="1"
+            android:inputType="textPersonName" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_14"
+            android:paddingLeft="5dp"
+            android:textAllCaps="true"
+            android:text="@string/suEmail"/>
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
+            android:layout_marginVertical="@dimen/margin_10"
+            android:maxLines="1"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_3x"
-            android:inputType="textEmailAddress"
-            android:hint="@string/suEmail" />
-
+            android:inputType="textEmailAddress" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_14"
+            android:paddingLeft="5dp"
+            android:text="@string/lg_password"/>
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_3x"
-            android:inputType="textPassword"
-            android:hint="@string/suPassword" />
+            android:layout_marginVertical="@dimen/margin_10"
+            android:maxLines="1"
+            android:inputType="textPassword" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_14"
+            android:paddingLeft="5dp"
+            android:textAllCaps="true"
+            android:text="@string/suNumber"/>
         <EditText
             android:id="@+id/mPhoneNum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_3x"
             android:fontFamily="sans-serif"
-            android:inputType="phone"
-            android:hint="@string/suNumber" />
+            android:layout_marginVertical="@dimen/margin_10"
+            android:maxLines="1"
+            android:inputType="phone" />
 
         <Button
             android:id="@+id/mRegister"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/disabled_button"
+            android:layout_marginVertical="@dimen/margin_10"
             android:clickable="false"
             android:enabled="false"
-            android:layout_margin="@dimen/margin_3x"
             android:text="@string/sign_up"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_14"
             />
 
     </LinearLayout>

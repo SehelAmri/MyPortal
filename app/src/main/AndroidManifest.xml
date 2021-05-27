@@ -29,6 +29,7 @@
             android:name=".Login"
             android:screenOrientation="portrait"
             android:parentActivityName=".StartMenu"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/LogSignTheme"/>
 
         <activity

@@ -5,23 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="1">
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:paddingHorizontal="@dimen/margin_20"
-        android:gravity="center"
-        android:layout_weight="0.97">
+        android:paddingHorizontal="@dimen/margin_30"
+        android:gravity="center">
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/log_tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="30dp"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorHeight="2dp"
+            android:background="@drawable/border_bottom"
+            />
 
         <TextView
             android:layout_width="match_parent"
+            android:id="@+id/edtNameOrEmail"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_14"
             android:paddingLeft="5dp"
@@ -29,7 +32,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/linearUserName"
             android:orientation="horizontal"
+            android:visibility="visible"
             android:weightSum="1">
         <EditText
             android:id="@+id/logName"
@@ -61,6 +66,16 @@
                 android:nextFocusDown="@+id/logPassword"
                 android:maxLines="1" />
         </LinearLayout>
+        <EditText
+            android:id="@+id/logEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/margin_10"
+            android:inputType="textEmailAddress"
+            android:imeOptions="actionNext"
+            android:visibility="gone"
+            android:nextFocusRight="@+id/logNameNo"
+            android:maxLines="1" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,10 +105,8 @@
                     android:id="@+id/logLogIn"
                     android:layout_width="250dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/disabled_button"
-                    android:clickable="false"
+                    android:background="@drawable/enabled_button"
                     android:layout_gravity="center"
-                    android:enabled="false"
                     style="?android:attr/borderlessButtonStyle"
                     android:text="@string/lg_log_in"
                     android:textColor="@android:color/white"
@@ -114,75 +127,6 @@
             android:textSize="@dimen/text_14"
             android:padding="5dp"
             android:text="@string/lg_forgot_your_password"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="@dimen/margin_20"
-            android:weightSum="1">
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:background="@color/border_dark_grey"
-                android:layout_weight="0.4"
-                />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/lg_or"
-                android:gravity="center"
-                android:layout_weight="0.2"/>
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:background="@color/border_dark_grey"
-                android:layout_weight="0.4"
-                />
-        </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_16"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-light"
-            android:text="Log In With Email"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_weight="0.03"
-        android:orientation="vertical">
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/border_dark_grey"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:padding="15dp"
-        android:weightSum="1">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:textSize="@dimen/text_16"
-            android:gravity="center_vertical|right"
-            android:text="@string/lg_don_t_have_an_account"/>
-        <TextView
-            android:id="@+id/logHelp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textSize="@dimen/text_16"
-            android:layout_weight="0.5"
-            android:textColor="@color/colorPrimaryDark"
-                android:text="@string/log_sign_up"/>
-    </LinearLayout>
-    </LinearLayout>
-    </LinearLayout>
+
+   </LinearLayout>
 </RelativeLayout>

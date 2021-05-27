@@ -4,14 +4,14 @@
     <string name="lg_langDropdown_txt_es">Spanish</string>
     <string name="lg_langDropdown_txt_zh_rCN">Chinese (Simplified)</string>
     <string name="lg_adb_set_lang_title">SELECT YOUR LANGUAGE</string>
-    <string name="lg_username">USERNAME</string>
-    <string name="lg_password">PASSWORD</string>
+    <string name="lg_username">Username</string>
+    <string name="lg_password">Password</string>
     <string name="lg_log_in">Log In</string>
     <string name="lg_forgot_your_password">Forgot your password?</string>
     <string name="lg_don_t_have_an_account">Don\'t have an account?</string>
     <string name="log_sign_up">" Sign up."</string>
     <string name="create_account">Create your account</string>
-    <string name="suEmail">Email</string>
+    <string name="suEmail">Email Address</string>
     <string name="suName">Username</string>
     <string name="suPassword">Password</string>
     <string name="suNumber">Phone Number</string>
@@ -19,6 +19,9 @@
     <string name="lg_or">OR</string>
     <string name="transfer_data_with_ease_through_out_all_devices">Transfer data with ease through out all devices</string>
     <string name="continue_without_signing_up">Continue without signing up</string>
+    <string name="valid_login_required">A valid login is required</string>
+    <string name="valid_password_required">Password is required</string>
+    <string name="valid_id_required">ID is required</string>
     <string-array name="languages">
         <item>@string/lg_langDropdown_txt_en</item>
         <item>@string/lg_langDropdown_txt_es</item>

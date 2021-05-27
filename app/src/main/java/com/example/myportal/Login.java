@@ -10,6 +10,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
@@ -20,12 +21,14 @@ import android.view.View;
 import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myportal.Retrofit.RetroService;
 import com.example.myportal.Retrofit.RetrofitClient;
 import com.example.myportal.Utils.LangSetup;
+import com.google.android.material.tabs.TabLayout;
 
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -37,9 +40,11 @@ import retrofit2.Retrofit;
 public class Login extends AppCompatActivity {
     Button logLogInBtn;
     String nameInput,passInput;
-    EditText logPassword,logName;
-    TextView logHelp;
+    EditText logPassword,logName,logEmail,logNameNo;
+    TextView logHelp,edtUserOrEmail;
+    LinearLayout linearUserName;
     LangSetup langSetup;
+    TabLayout logTabLayout;
     Boolean isVisible = true;
    CompositeDisposable compositeDisposable = new CompositeDisposable();
     RetroService retroService;
@@ -53,25 +58,76 @@ public class Login extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setContentView(R.layout.activity_login);
         initView();
+        tabLayoutFunc();
         //Init Service
         Retrofit retrofitClient = RetrofitClient.getInstance();
         retroService = retrofitClient.create(RetroService.class);
-        logHelp.setOnClickListener(v -> {
+      /*  logHelp.setOnClickListener(v -> {
             Intent intent = new Intent(Login.this,SignUp.class);
             startActivity(intent);
-        });
-
-        logPassword.addTextChangedListener(textWatcher());
-        logName.addTextChangedListener(textWatcher());
+        });*/
         logPassword.setOnTouchListener(onPassTouchListener());
         logLogInBtn.setOnClickListener(v -> {
-               loginUser(logName.getText().toString(),
-                       logPassword.getText().toString());
+            if(logTabLayout.getSelectedTabPosition() == 0) {
+                if(!logName.getText().toString().isEmpty() && !logPassword.getText().toString().isEmpty()
+                &&!logNameNo.getText().toString().isEmpty()) {
+                    loginUser(logName.getText().toString(),Integer.valueOf(logNameNo.getText().toString()),
+                            logPassword.getText().toString());
+                }else{
+                    if(logName.getText().toString().isEmpty())
+                    logName.setError(getString(R.string.valid_login_required));
+                    else if(logPassword.getText().toString().isEmpty())
+                        logPassword.setError(getString(R.string.valid_password_required));
+                    else if(logNameNo.getText().toString().isEmpty())
+                        logNameNo.setError(getString(R.string.valid_id_required));
+                }
+            }else if(logTabLayout.getSelectedTabPosition() == 1){
+                if(!logEmail.getText().toString().isEmpty()
+                   && !logPassword.getText().toString().isEmpty()) {
+                    loginUserEmail(logEmail.getText().toString(),
+                            logPassword.getText().toString());
+                }else{
+                    if(logEmail.getText().toString().isEmpty())
+                        logEmail.setError(getString(R.string.valid_login_required));
+                    else if(logPassword.getText().toString().isEmpty())
+                        logPassword.setError(getString(R.string.valid_password_required));
+                }
+            }
         });
     }
 
-    private void loginUser(String name, String password) {
-       compositeDisposable.add(retroService.loginUser(name,password)
+    private void tabLayoutFunc() {
+        logTabLayout.addTab(logTabLayout.newTab().setText(R.string.lg_username));
+        logTabLayout.addTab(logTabLayout.newTab().setText(R.string.suEmail));
+        logTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        logTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getText() == getString(R.string.suEmail)){
+                    logEmail.setVisibility(View.VISIBLE);
+                    edtUserOrEmail.setText(R.string.suEmail);
+                    linearUserName.setVisibility(View.GONE);
+                }else if(tab.getText() == getString(R.string.lg_username)){
+                    linearUserName.setVisibility(View.VISIBLE);
+                    edtUserOrEmail.setText(R.string.lg_username);
+                    logEmail.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    private void loginUser(String name, Integer id, String password) {
+       compositeDisposable.add(retroService.loginUser(name,id,password)
                .subscribeOn(Schedulers.io())
                .observeOn(AndroidSchedulers.mainThread())
                .subscribe(response -> {
@@ -80,41 +136,30 @@ public class Login extends AppCompatActivity {
                ));
 
     }
+    private void loginUserEmail(String email, String password) {
+        compositeDisposable.add(retroService.loginUserEmail(email,password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                            Toast.makeText(Login.this, "" + response, Toast.LENGTH_LONG).show();
+                        }
+                ));
+
+    }
 
     public void initView(){
         logName = findViewById(R.id.logName);
+        logNameNo = findViewById(R.id.logNameNo);
         logPassword = findViewById(R.id.logPassword);
         logLogInBtn = findViewById(R.id.logLogIn);
-        logHelp = findViewById(R.id.logHelp);
+       // logHelp = findViewById(R.id.logHelp);
+        logTabLayout = findViewById(R.id.log_tabLayout);
+        edtUserOrEmail = findViewById(R.id.edtNameOrEmail);
+        linearUserName = findViewById(R.id.linearUserName);
+        logEmail = findViewById(R.id.logEmail);
     }
 
-    public TextWatcher textWatcher(){
-        TextWatcher textWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                nameInput = logName.getText().toString().trim();
-                passInput = logPassword.getText().toString().trim();
-                logLogInBtn.setClickable(!nameInput.isEmpty() && !passInput.isEmpty());
-                logLogInBtn.setEnabled(!nameInput.isEmpty() && !passInput.isEmpty());
-                if(!nameInput.isEmpty() && !passInput.isEmpty()) {
-                    logLogInBtn.setBackground(getResources().getDrawable(R.drawable.enabled_button));
-                }else {
-                    logLogInBtn.setBackground(getResources().getDrawable(R.drawable.disabled_button));
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        };
-        return textWatcher;
-    }
     public View.OnTouchListener onPassTouchListener(){
         View.OnTouchListener onTouchListener = new View.OnTouchListener() {
             @Override

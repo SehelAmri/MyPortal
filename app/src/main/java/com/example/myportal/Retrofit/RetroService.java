@@ -11,10 +11,15 @@ public interface RetroService {
     @FormUrlEncoded
     Observable<String> registerUser(@Field("email") String email,
                                     @Field("name") String name,
+                                    @Field("name") Integer id,
                                     @Field("password") String password);
     @POST("loginName")
     @FormUrlEncoded
     Observable<String> loginUser(@Field("name") String name,
+                                 @Field("id") Integer id,
                                  @Field("password") String password);
-
+    @POST("loginEmail")
+    @FormUrlEncoded
+    Observable<String> loginUserEmail(@Field("email") String name,
+                                 @Field("password") String password);
 }
